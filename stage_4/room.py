@@ -6,7 +6,6 @@ class Room():
         self.description = None
         self.linked_rooms = {}
         self.inhabitant = None
-        self.item = None
         
     def describe(self):
         # sends a description of the room to the terminal
@@ -14,8 +13,6 @@ class Room():
         print(self.description)
         if self.inhabitant is not None:
             self.inhabitant.describe()
-        if self.item is not None:
-            self.item.describe()
         for direction in self.linked_rooms.keys():
             print(f"To the {direction} is the {self.linked_rooms[direction].name}")
     

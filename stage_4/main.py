@@ -1,6 +1,5 @@
 from room import Room
 from character import Enemy, Friend
-from item import Item
 
 # create rooms
 cavern = Room("Cavern")
@@ -31,21 +30,6 @@ nigel.conversation = "Well youngan, what are you doing here?"
 # add characters to rooms
 armoury.inhabitant = ugine
 lab.inhabitant = nigel
-
-# create items
-cheese = Item("Cheese")
-cheese.description = "super smelly"
-
-chair = Item("Chair")
-chair.description = "designed to be sat on"
-
-elmo = Item("Elmo")
-elmo.description = "wanting to be tickled"
-
-# add items to rooms
-cavern.item = chair
-armoury.item = elmo
-lab.item = cheese
 
 '''
 # describe the rooms
