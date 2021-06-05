@@ -38,25 +38,18 @@ class Friend(Character):
         
 class Enemy(Character):
     
-    num_of_enemy = 0
-    
-    def __init__(self,name):
+    def __init(self,name):
         # initialise the Enemy object by calling the character initialise
         super().__init__(name)
         self.weakness = None
-        Enemy.num_of_enemy += 1
         
     def fight(self, item):
         # fights enemy with provided item and returns if player survives
         if item == self.weakness:
             print(f"You strike {self.name} down with {item}.")
-            Enemy.num_of_enemy -= 1
             return True
         else:
             print(f"{self.name} crushes you. Puny adventurer")
             return False
-    
-    def get_num_of_enemy():
-        return Enemy.num_of_enemy
         
         

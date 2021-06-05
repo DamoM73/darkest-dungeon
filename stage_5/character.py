@@ -38,7 +38,7 @@ class Friend(Character):
         
 class Enemy(Character):
     
-    def __init(self,name):
+    def __init__(self,name):
         # initialise the Enemy object by calling the character initialise
         super().__init__(name)
         self.weakness = None

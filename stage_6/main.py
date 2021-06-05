@@ -65,23 +65,18 @@ while running:
     
     command = input("> ").lower()
     
-    # move
     if command in ["north", "south", "east", "west"]:
         current_room = current_room.move(command)
-        print(f"You travel {command}")
-    # talk
     elif command == "talk":
         if current_room.inhabitant is not None:
             current_room.inhabitant.talk()
         else:
             print("There is no one here to talk to")
-    # hug
     elif command == "hug":
         if current_room.inhabitant is not None:
             current_room.inhabitant.hug()
         else:
             print("There is no one here to hug")
-    # fight
     elif command== "fight":
         if current_room.inhabitant is not None:
             weapon = input("What will you fight with? > ").lower()
@@ -91,9 +86,6 @@ while running:
             if weapon in available_weapons:
                 if current_room.inhabitant.fight(weapon):
                     current_room.inhabitant = None
-                    if Enemy.num_of_enemy == 0:
-                        print("You have slain the enemy. You are victorious!")
-                        running = False
                 else:
                     running = False
             else:
@@ -102,7 +94,6 @@ while running:
                 running = False
         else:
             print("There is no one here to fight")
-    # take
     elif command == "take":
         if current_room.item is not None:
             backpack.append(current_room.item)
@@ -110,7 +101,6 @@ while running:
             current_room.item = None
         else:
             print("There is nothing here to take")
-    # backpack
     elif command == "backpack":
         if backpack == []:
             print("It is empty")
@@ -118,21 +108,7 @@ while running:
             print("You have:")
             for item in backpack:
                 print(f"- {item.name.capitalize()}")
-    # help
-    elif command == "help":
-        print("Type which direction you wish to move,")
-        print("or use one of these commands:")
-        print("- Talk")
-        print("- Fight")
-        print("- Hug")
-        print("- Take")
-        print("- Backpack")
-    # quit
     elif command == "quit":
         running = False
-    # incorrect command
     else:
-        print("Enter 'help' for list of commands")
-    input("\nPress <Enter> to continue")
-    
-print("Thank you for playing Darkest Dungeon")
+        print("I don't understand.")
