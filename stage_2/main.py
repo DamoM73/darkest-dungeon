@@ -1,5 +1,4 @@
 from room import Room
-from character import Character
 
 # create rooms
 cavern = Room("Cavern")
@@ -16,19 +15,6 @@ cavern.link_rooms(armoury,"south")
 armoury.link_rooms(cavern,"north")
 armoury.link_rooms(lab,"east")
 lab.link_rooms(armoury,"west")
-
-
-# create characters
-ugine = Character("Ugine")
-ugine.description = "a huge troll with rotting teeth."
-
-nigel = Character("Nigel")
-nigel.description = "a burly dwarf with golden bead in woven through his beard."
-nigel.conversation = "Well youngan, what are you doing here?"
-
-# add characters to rooms
-armoury.inhabitant = ugine
-lab.inhabitant = nigel
 
 '''
 # describe the rooms
@@ -49,21 +35,6 @@ while running:
     
     if command in ["north", "south", "east", "west"]:
         current_room = current_room.move(command)
-    elif command == "talk":
-        if current_room.inhabitant is not None:
-            current_room.inhabitant.talk()
-        else:
-            print("There is no one here to talk to")
-    elif command == "hug":
-        if current_room.inhabitant is not None:
-            current_room.inhabitant.hug()
-        else:
-            print("There is no one here to hug")
-    elif command== "fight":
-        if current_room.inhabitant is not None:
-            current_room.inhabitant.fight()
-        else:
-            print("There is no one here to fight")
     elif command == "quit":
         running = False
     else:
