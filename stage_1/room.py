@@ -7,6 +7,7 @@ class Room():
         self.linked_rooms = {}
         
     def describe(self):
+        # displays a description of the room in the UI
         print(f"\nYou are in the {self.name}")
         print(self.description)
         for direction in self.linked_rooms:

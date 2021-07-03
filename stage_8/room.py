@@ -19,9 +19,9 @@ class Room():
         for direction in self.linked_rooms.keys():
             print(f"To the {direction} is the {self.linked_rooms[direction].name}")
     
-    def link_rooms(self, room_to_link, direction):
+    def link_rooms(self, room, direction):
         # links the provided room, in the provided direction
-        self.linked_rooms[direction.lower()] = room_to_link
+        self.linked_rooms[direction.lower()] = room
         
     def move(self, direction):
         # returns the room linked in the given direction
