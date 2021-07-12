@@ -1,3 +1,5 @@
+# room.py
+
 class Room():
     
     def __init__(self,room_name):
@@ -16,3 +18,6 @@ class Room():
     def link_rooms(self, room_to_link, direction):
         # links the provided room, in the provided direction
         self.linked_rooms[direction.lower()] = room_to_link
+        
+        
+        
