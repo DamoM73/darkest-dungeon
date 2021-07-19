@@ -18,7 +18,6 @@ armoury.link_rooms(cavern,"north")
 armoury.link_rooms(lab,"east")
 lab.link_rooms(armoury,"west")
 
-
 # create characters
 ugine = Enemy("Ugine")
 ugine.description = "a huge troll with rotting teeth."
@@ -46,13 +45,6 @@ elmo.description = "wanting to be tickled"
 cavern.item = chair
 armoury.item = elmo
 lab.item = cheese
-
-'''
-# describe the rooms
-cavern.describe()
-armoury.describe()
-lab.describe()
-'''
 
 # initialise variables
 running = True

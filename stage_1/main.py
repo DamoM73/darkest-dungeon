@@ -1,3 +1,5 @@
+# main.py
+
 from room import Room
 
 # create rooms
@@ -20,3 +22,4 @@ lab.link_rooms(armoury,"west")
 cavern.describe()
 armoury.describe()
 lab.describe()
+
