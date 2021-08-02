@@ -29,8 +29,8 @@ nigel.description = "a burly dwarf with golden bead in woven through his beard."
 nigel.conversation = "Well youngan, what are you doing here?"
 
 # add characters to rooms
-armoury.inhabitant = ugine
-lab.inhabitant = nigel
+armoury.character = ugine
+lab.character = nigel
 
 # create items
 cheese = Item("Cheese")
@@ -68,29 +68,29 @@ while running:
     if command in ["north", "south", "east", "west"]:
         current_room = current_room.move(command)
     elif command == "talk":
-        if current_room.inhabitant is not None:
-            current_room.inhabitant.talk()
+        if current_room.character is not None:
+            current_room.character.talk()
         else:
             print("There is no one here to talk to")
     elif command == "hug":
-        if current_room.inhabitant is not None:
-            current_room.inhabitant.hug()
+        if current_room.character is not None:
+            current_room.character.hug()
         else:
             print("There is no one here to hug")
     elif command== "fight":
-        if current_room.inhabitant is not None:
+        if current_room.character is not None:
             weapon = input("What will you fight with? > ").lower()
             available_weapons = []
             for item in backpack:
                 available_weapons.append(item.name)
             if weapon in available_weapons:
-                if current_room.inhabitant.fight(weapon):
-                    current_room.inhabitant = None
+                if current_room.character.fight(weapon):
+                    current_room.character = None
                 else:
                     running = False
             else:
                 print(f"You don't have {weapon}")
-                print(f"{current_room.inhabitant.name} strikes you down.")
+                print(f"{current_room.character.name} strikes you down.")
                 running = False
         else:
             print("There is no one here to fight")
