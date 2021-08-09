@@ -87,7 +87,7 @@ while running:
                 if current_room.inhabitant.fight(weapon):
                     current_room.inhabitant = None
                     if Enemy.num_of_enemy == 0:
-                        print("You have slain the enemy. You are victorious!")
+                        print("You have slain the all the enemies. You are victorious!")
                         running = False
                 else:
                     running = False

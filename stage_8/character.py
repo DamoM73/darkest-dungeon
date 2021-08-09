@@ -25,7 +25,8 @@ class Character():
         # the character response to a threat
         print(f"{self.name} doesn't want to fight you")
         return True
-        
+
+
 class Friend(Character):
     
     def __init__(self, name):
@@ -35,6 +36,7 @@ class Friend(Character):
     def hug(self):
         # the friend responds to a hug
         print(f"{self.name} hugs you back.")
+
         
 class Enemy(Character):
     
