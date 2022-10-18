@@ -1,23 +1,31 @@
 from room import Room
 from character import Enemy, Friend
 from item import Item
-from rich import print
+from console import UI
+
+ui = UI()
 
 # create rooms
 cavern = Room("Cavern")
-cavern.description = ("A room so big that the light of your torch doesn’t reach the walls.")
+cavern.description = (
+    "A room so big that the light of your torch doesn’t reach the walls."
+)
 
 armoury = Room("Armoury")
-armoury.description = ("The walls are lined with racks that once held weapons and armour.")
+armoury.description = (
+    "The walls are lined with racks that once held weapons and armour."
+)
 
 lab = Room("Laboratory")
-lab.description = ("A strange odour hangs in a room filled with unknownable contraptions.")
+lab.description = (
+    "A strange odour hangs in a room filled with unknownable contraptions."
+)
 
 # link rooms
-cavern.link_rooms(armoury,"south")
-armoury.link_rooms(cavern,"north")
-armoury.link_rooms(lab,"east")
-lab.link_rooms(armoury,"west")
+cavern.link_rooms(armoury, "south")
+armoury.link_rooms(cavern, "north")
+armoury.link_rooms(lab, "east")
+lab.link_rooms(armoury, "west")
 
 # create characters
 ugine = Enemy("Ugine")
@@ -54,78 +62,72 @@ backpack = []
 
 # ----- MAIN LOOP -----
 while running:
-    current_room.describe()
-    
+    ui.display_description(current_room.describe())
+
     command = input("> ").lower()
-    
+
     # move
     if command in ["north", "south", "east", "west"]:
-        current_room = current_room.move(command)
-        print(f"[red]You travel {command}[/red]")
-    # talk
+        descript, current_room = current_room.move(command)
+        ui.display_action(descript)
     elif command == "talk":
         if current_room.inhabitant is not None:
-            current_room.inhabitant.talk()
+            ui.display_action(current_room.inhabitant.talk())
         else:
-            print("There is no one here to talk to")
-    # hug
+            ui.display_action("There is no one here to talk to")
     elif command == "hug":
         if current_room.inhabitant is not None:
-            current_room.inhabitant.hug()
+            ui.display_action(current_room.inhabitant.hug())
         else:
-            print("There is no one here to hug")
-    # fight
-    elif command== "fight":
+            ui.display_action("There is no one here to hug")
+    elif command == "fight":
         if current_room.inhabitant is not None:
             weapon = input("What will you fight with? > ").lower()
-            available_weapons = []
-            for item in backpack:
-                available_weapons.append(item.name)
+            available_weapons = [item.name for item in backpack]
             if weapon in available_weapons:
-                if current_room.inhabitant.fight(weapon):
+                fight_descript, survive = current_room.inhabitant.fight(weapon)
+                if survive:
                     current_room.inhabitant = None
                     if Enemy.num_of_enemy == 0:
-                        print("You have slain the enemy. You are victorious!")
+                        fight_descript += (
+                            "\nYou have slain the enemy. You are victorious!"
+                        )
                         running = False
                 else:
                     running = False
+                ui.display_action(fight_descript)
             else:
-                print(f"You don't have {weapon}")
-                print(f"{current_room.inhabitant.name} strikes you down.")
+                ui.display_action(
+                    f"You don't have {weapon}\n{current_room.inhabitant.name} strikes you down."
+                )
                 running = False
         else:
-            print("There is no one here to fight")
-    # take
+            ui.display_action("There is no one here to fight")
     elif command == "take":
         if current_room.item is not None:
             backpack.append(current_room.item)
-            print(f"You put {current_room.item.name} into your backpack")
+            ui.display_action(f"You put {current_room.item.name} into your backpack")
             current_room.item = None
         else:
-            print("There is nothing here to take")
-    # backpack
+            ui.display_action("There is nothing here to take")
     elif command == "backpack":
-        if backpack == []:
-            print("It is empty")
+        if not backpack:
+            ui.display_action("It is empty")
         else:
-            print("You have:")
+            contents = "You have:"
             for item in backpack:
-                print(f"- {item.name.capitalize()}")
-    # help
+                contents += "\n" + f"- {item.name.capitalize()}"
+
     elif command == "help":
-        print("Type which direction you wish to move,")
-        print("or use one of these commands:")
-        print("- Talk")
-        print("- Fight")
-        print("- Hug")
-        print("- Take")
-        print("- Backpack")
-    # quit
+        ui.display_action(
+            "Type which direction you wish to move,\nor use one of these commands:\n- Talk\n- Fight\n- Hug\n- Take\n- Backpack\n- quit"
+        )
     elif command == "quit":
         running = False
-    # incorrect command
     else:
-        print("Enter 'help' for list of commands")
-    input("\nPress <Enter> to continue")
-    
-print("Thank you for playing Darkest Dungeon")
+        ui.display_action("Enter 'help' for list of commands")
+    """
+    if running:
+        input("\nPress <Enter> to continue")"""
+
+ui.display_action("Thank you for playing Darkest Dungeon")
