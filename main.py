@@ -1,6 +1,7 @@
 from room import Room
 from character import Enemy, Friend
 from item import Item
+from rich import print
 
 # create rooms
 cavern = Room("Cavern")
@@ -60,7 +61,7 @@ while running:
     # move
     if command in ["north", "south", "east", "west"]:
         current_room = current_room.move(command)
-        print(f"You travel {command}")
+        print(f"[red]You travel {command}[/red]")
     # talk
     elif command == "talk":
         if current_room.inhabitant is not None:
